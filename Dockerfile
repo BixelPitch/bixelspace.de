@@ -1,12 +1,14 @@
-FROM oven/bun:1 as base
+FROM node:20-alpine as base
 WORKDIR /usr/src/app
 
-FROM base as install
-COPY . .
-RUN bun run build
+FROM base as build
+COPY --link package.json package-lock.json ./
+RUN npm install
+COPY --link . .
+RUN npm run build
+RUN npm prune
 
-FROM base as release
-COPY --from=install .output/ .
-USER bun
-EXPOSE 3000/tcp
-ENTRYPOINT [ "bun", "run", "server/index.mjs" ]
+FROM base
+COPY --from=build /usr/src/app/.output .
+EXPOSE 3000
+ENTRYPOINT [ "node", "./server/index.mjs" ]
