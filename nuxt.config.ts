@@ -9,9 +9,10 @@ export default defineNuxtConfig({
   i18n: {
     defaultLocale: "de",
     locales: [
-      { code: "en", iso: "en-US" },
-      { code: "de", iso: "de-DE" },
+      { code: "en", iso: "en-US", file: "en-US.json" },
+      { code: "de", iso: "de-DE", file: "de-DE.json", isCatchallLocale: true },
     ],
+    langDir: "locales/",
   },
   site: {
     url: "http://localhost:3000",
@@ -23,7 +24,7 @@ export default defineNuxtConfig({
     cacheMaxAgeSeconds: 3600,
   },
   schemaOrg: {
-    identity: 'Person',
+    identity: "Person",
   },
   $production: {
     app: {
