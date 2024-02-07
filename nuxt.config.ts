@@ -18,7 +18,6 @@ export default defineNuxtConfig({
     url: "http://localhost:3000",
     name: "Bixelspace",
     description: "Welcome to BixelSpace!",
-    trailingSlash: true,
   },
   sitemap: {
     cacheMaxAgeSeconds: 3600,
